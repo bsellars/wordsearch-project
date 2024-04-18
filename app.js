@@ -37,36 +37,57 @@ class Board {
         ).join('\n')
     }
 
-    connectedCallBack() {
-        const letter = document.querySelector("#cell")
-
-        const contentNode = letter.content.cloneNode(true)
-
-        const innerCell = contentNode.querySelector('div')
-
-        const board = new Board(10, 8)
-
-        innerCell.textContent = board.toString();
-
-
+    forEach(callBack){
+        this.grid.forEach(
+            (row)=>{
+                row.forEach(
+                    (cell)=>{
+                        console.log({letter: cell})
+                        callBack(cell)
+                    }
+                )
+            }
+        )
     }
 
+    // connectedCallBack() {
+    //     const letter = document.querySelector("#cell")
+
+    //     const contentNode = letter.content.cloneNode(true)
+
+    //     const innerCell = contentNode.querySelector('div')
+
+    //     const board = new Board(10, 8)
+
+    //     innerCell.textContent = board.toString();
+    // }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // function wordSearch(wordsForWordSearch, randomizedLetters) {
-
-    // }
-
-    
-
     const board = new Board(10, 8)
 
-    console.log(board.toString())
+    if (document.createElement("template")) {
+        const template = document.querySelector('#cell');
 
-    const targetDiv = document.querySelector("#cell")
+        if (!template) {
+            throw new Error('template not found')
+        }
+        board.forEach(
+            ({letter})=>{
+                const cell = template.content.cloneNode(true);
 
-    targetDiv.innerHTML = `<div>${board.toString()}</div>`
-
+                const cellText = cell.querySelector("#cell-text")
+        
+                if (!cellText) {
+                    throw new Error('not Found')
+                }
+        
+                cellText.textContent = letter
+        
+                document.querySelector("#grid").appendChild(cellText)
+            }
+        )
+        
+    }
 })
 
