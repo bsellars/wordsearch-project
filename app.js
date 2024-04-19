@@ -37,34 +37,27 @@ class Board {
         ).join('\n')
     }
 
-    forEach(callBack){
+    forEach(callBack) {
         this.grid.forEach(
-            (row)=>{
+            (row) => {
                 row.forEach(
-                    (cell)=>{
-                        console.log({letter: cell})
+                    (cell) => {
                         callBack(cell)
                     }
                 )
             }
         )
     }
-
-    // connectedCallBack() {
-    //     const letter = document.querySelector("#cell")
-
-    //     const contentNode = letter.content.cloneNode(true)
-
-    //     const innerCell = contentNode.querySelector('div')
-
-    //     const board = new Board(10, 8)
-
-    //     innerCell.textContent = board.toString();
-    // }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const board = new Board(10, 8)
+    const board = new Board(10, 10)
+
+    const gridRoot = document.querySelector("#grid")
+
+    gridRoot.addEventListener('click', (e) => {
+        console.log({ target: e.target.textContent })
+    })
 
     if (document.createElement("template")) {
         const template = document.querySelector('#cell');
@@ -73,21 +66,22 @@ document.addEventListener('DOMContentLoaded', () => {
             throw new Error('template not found')
         }
         board.forEach(
-            ({letter})=>{
+            ({ letter }) => {
                 const cell = template.content.cloneNode(true);
 
                 const cellText = cell.querySelector("#cell-text")
-        
+
                 if (!cellText) {
                     throw new Error('not Found')
                 }
-        
+
                 cellText.textContent = letter
-        
-                document.querySelector("#grid").appendChild(cellText)
+
+                gridRoot.appendChild(cellText)
+
+
             }
         )
-        
     }
 })
 
