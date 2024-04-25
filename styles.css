@@ -4,7 +4,7 @@ body {
 
 #grid {
     display: grid !important;
-    grid-template-columns: auto auto auto auto auto !important;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto !important;
     background-color: rgb(196, 47, 255);
     padding: 20px;
 }
@@ -16,4 +16,8 @@ body {
     font-size: 3vw;
     text-align: center;
     border-radius: 4px;
+}
+
+.selected{
+    color: limegreen;
 }
